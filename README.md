@@ -12,7 +12,7 @@ You can incorporate the library into your local workspace with the following 'go
 Code needing to call into the library needs to include the following import statement:
 ```go
 import (
-  "github.com/LindsayBradford/go-dbf/godbf"
+  "github.com/nando35x/go-dbf/godbf"
 )
 ```
 
