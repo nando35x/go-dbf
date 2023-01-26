@@ -9,10 +9,6 @@ This project is a part of go-shp library. [go-shp](https://github.com/jonas-p/go
 
 You can incorporate the library into your local workspace with the following 'go get' command:
 
-```go
-go get github.com/LindsayBradford/go-dbf/godbf
-```
-
 Code needing to call into the library needs to include the following import statement:
 ```go
 import (
