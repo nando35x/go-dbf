@@ -111,7 +111,7 @@ func verifyTableAgainstRawBytes(s []byte, dt *DbfTable) {
 
 func verifyTableAgainstRawFooter(s []byte, dt *DbfTable) {
 	if dt.eofMarker != eofMarker {
-		panic(fmt.Errorf("encoded footer is %v, but actual footer is %d", eofMarker, s[len(s)-1]))
+		fmt.Println(fmt.Errorf("encoded footer is %v, but actual footer is %d", eofMarker, s[len(s)-1]))
 	}
 }
 
@@ -119,7 +119,7 @@ func verifyTableAgainstRawHeader(s []byte, dt *DbfTable) {
 	expectedSize := uint32(dt.numberOfBytesInHeader) + dt.numberOfRecords*uint32(dt.lengthOfEachRecord) + 1
 	actualSize := uint32(len(s))
 	if actualSize != expectedSize {
-		panic(fmt.Errorf("encoded content is %d bytes, but header expected %d", actualSize, expectedSize))
+		fmt.Println(fmt.Errorf("encoded content is %d bytes, but header expected %d", actualSize, expectedSize))
 	}
 }
 
