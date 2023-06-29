@@ -2,13 +2,13 @@ package godbf
 
 import (
 	"errors"
-	. "github.com/onsi/gomega"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
+
+	. "github.com/onsi/gomega"
 )
 
 const validTestFile = "testdata/validFile.dbf"
@@ -42,7 +42,7 @@ func TestNewFromFile_ValidFile_TableIsCorrect(t *testing.T) {
 func TestNewFromByteArray_TableIsCorrect(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	rawFileBytes, loadErr := ioutil.ReadFile(validTestFile)
+	rawFileBytes, loadErr := os.ReadFile(validTestFile)
 	g.Expect(loadErr).To(BeNil())
 
 	tableUnderTest, byteArrayErr := NewFromByteArray(rawFileBytes, testEncoding)
@@ -54,7 +54,7 @@ func TestNewFromByteArray_TableIsCorrect(t *testing.T) {
 func TestSaveToFile_LoadOfSavedIsCorrect(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	rawFileBytes, loadErr := ioutil.ReadFile(validTestFile)
+	rawFileBytes, loadErr := os.ReadFile(validTestFile)
 	g.Expect(loadErr).To(BeNil())
 
 	tableFromBytes, _ := NewFromByteArray(rawFileBytes, testEncoding)
@@ -102,7 +102,7 @@ func TestSaveToFile_FromNew_NoError(t *testing.T) {
 func TestNewFromByteArray_EndOfFieldMarkerMissing_TableParsingError(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	rawFileBytes, loadErr := ioutil.ReadFile(validTestFile)
+	rawFileBytes, loadErr := os.ReadFile(validTestFile)
 	g.Expect(loadErr).To(BeNil())
 
 	// Pad entire name byte range, including the final 11th byte, with non-terminating characters.
@@ -256,7 +256,7 @@ func (statErrorFileSystem) Stat(name string) (os.FileInfo, error) {
 func TestSaveToFile_CreateErrors_Errors(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	rawFileBytes, loadErr := ioutil.ReadFile(validTestFile)
+	rawFileBytes, loadErr := os.ReadFile(validTestFile)
 	g.Expect(loadErr).To(BeNil())
 
 	tableFromBytes, _ := NewFromByteArray(rawFileBytes, testEncoding)
@@ -282,7 +282,7 @@ func (createErrorFileSystem) Create(name string) (*os.File, error) {
 func TestSaveToFile_CreatePanics_Errors(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	rawFileBytes, loadErr := ioutil.ReadFile(validTestFile)
+	rawFileBytes, loadErr := os.ReadFile(validTestFile)
 	g.Expect(loadErr).To(BeNil())
 
 	tableFromBytes, _ := NewFromByteArray(rawFileBytes, testEncoding)
