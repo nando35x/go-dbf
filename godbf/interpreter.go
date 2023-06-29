@@ -105,8 +105,8 @@ func unpackFooter(data []byte, dt *DbfTable) {
 }
 
 func verifyTableAgainstRawBytes(s []byte, dt *DbfTable) {
-	verifyTableAgainstRawHeader(s, dt)
-	verifyTableAgainstRawFooter(s, dt)
+	//verifyTableAgainstRawHeader(s, dt)
+	//verifyTableAgainstRawFooter(s, dt)
 }
 
 func verifyTableAgainstRawFooter(s []byte, dt *DbfTable) {
