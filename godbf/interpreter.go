@@ -90,19 +90,9 @@ func deriveFieldName(s []byte, dt *DbfTable, offset int) string {
 	if endOfFieldIndex == -1 {
 		msg := fmt.Sprintf("end-of-field marker missing from field bytes, offset [%d,%d]", offset, offset+fieldNameByteLength)
 		panic(errors.New(msg))
-	}
+	}	
 
-	var end int
-
-	for i, v := range nameBytes {
-		if v == 0 {
-			end = i
-			break
-		}
-		end = endOfFieldIndex
-	}
-
-	fieldName := dt.decoder.ConvertString(string(nameBytes[:end]))
+	fieldName := dt.decoder.ConvertString(string(nameBytes[:endOfFieldIndex]))
 	return fieldName
 }
 
